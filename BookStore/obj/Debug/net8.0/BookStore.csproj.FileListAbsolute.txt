@@ -129,3 +129,4 @@
 /Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/databashantering/BookStore/BookStore/obj/Debug/net8.0/BookStore.pdb
 /Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/databashantering/BookStore/BookStore/obj/Debug/net8.0/BookStore.genruntimeconfig.cache
 /Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/databashantering/BookStore/BookStore/obj/Debug/net8.0/ref/BookStore.dll
+/Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/databashantering/BookStore/BookStore/obj/Debug/net8.0/BookStore.sourcelink.json

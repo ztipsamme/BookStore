@@ -38,6 +38,7 @@ public class MainMenu
         {
             ("Show all books", ListAllBooks),
             ("Show all authors", ListAllAuthors),
+            ("Show all publishers", ListAllPublishers),
             ("Store inventory", ShowStoreInventory),
             // ("Show all publishers", ListAllPublishers),
             // ("Add book", AddBook),
@@ -61,11 +62,11 @@ public class MainMenu
         Console.Write("Choice: ");
         var choice = Console.ReadLine();
 
-        if (int.TryParse(choice, out int num) && num < 0 || num > menu.Count)
+        if (int.TryParse(choice, out int num) && num > 0 && num <= menu.Count)
         {
-            Console.WriteLine("Invalid choice");
+            menu[num - 1].method();
         }
-        else menu[num - 1].method();
+        else Console.WriteLine("Invalid choice");
 
         _ui.PressToContinue();
     }
@@ -87,6 +88,16 @@ public class MainMenu
         foreach (var author in authors)
         {
             Console.WriteLine($"{author.ToString()} | B-day: {author.Birthday} | Á books: {author.Books.Count}");
+        }
+    }
+
+    public void ListAllPublishers()
+    {
+        Console.WriteLine("\n=== All publishers ===\n");
+        var publishers = _publishers.GetAllPublishers();
+        foreach (var publisher in publishers)
+        {
+            Console.WriteLine($"{publisher.ToString()} | Á books: {publisher.Books.Count}");
         }
     }
 
@@ -120,20 +131,27 @@ public class MainMenu
         else if (choice.ToLower() == "b") return;
         else
         {
-            System.Console.WriteLine($"\n--- {stores[num - 1].Name}'s inventory ---");
+            System.Console.WriteLine($"\n--- {stores[num - 1].Name}'s inventory ---\n");
             var booksInInventory = _stores.GetStoreInventoryByStoreId(num - 1);
 
             if (booksInInventory.Count == 0)
             {
-                System.Console.WriteLine("/nInventory is empty");
+                System.Console.WriteLine("Inventory is empty\n");
                 return;
             }
+
+            int totalQuantity = 0;
 
             for (int i = 0; i < booksInInventory.Count; i++)
             {
                 var book = _books.GetBookByIsbn(booksInInventory[i].Isbn13);
-                System.Console.WriteLine(book.ToString());
+                int quantity = booksInInventory[i].Amount;
+                totalQuantity += quantity;
+
+                System.Console.WriteLine($"{book.ToString()} | Price: {book.Price} | Quantity: {quantity}");
             }
+
+            System.Console.WriteLine($"Total books in store: {totalQuantity}");
         }
     }
 
